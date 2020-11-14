@@ -1,0 +1,129 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.wrapper{
+    background: #ddd;
+    // padding: 50px 200px;
+    width: 700px;
+    margin: 100px auto;
+
+    header{
+        background: #ccc;
+        padding: 20px;
+        text-align: center;
+        font-size: large;
+    }
+    nav{
+        background :red;
+        padding: 5px;
+
+        ul{
+            
+            li{
+                list-style-type: none;
+                display: inline-block;
+                text-transform: uppercase;
+                font-weight: 800;
+                margin-right: 5px;
+
+                
+
+                a{
+                    color: white;
+                    text-decoration: none;
+                }
+            }
+        }
+    
+    }
+
+    .panel{
+        padding: 10px;
+        background: #f2f2f2;
+
+        .panel-header{
+            text-align: center;
+            padding: 10px;
+        }
+
+        .panel-body{
+            padding: 10px;
+
+            .car-photo{
+                display:grid;
+                grid-template-columns: repeat(3,1fr);
+
+                .arrow-photo{
+                    text-align: center;
+                    align-self: center;
+                }
+              
+            }
+
+            .car-details{
+                padding: 5px;
+                border: 1px solid #ddd;
+
+                .car-details-item{
+                    display: grid;
+                    grid-template-columns: .4fr 1fr;
+                    margin-bottom: 10px;
+
+                    label {
+                        margin-right: 10px;
+                        align-self: center;
+                    }
+                    input,select{
+                        border: 1px solid #ccc;
+                        padding: 7px;
+                        width: 400px;
+                    }
+                }
+
+                .car-details-button{
+                    padding: 5px;
+
+                    .btn.btn-submit{
+                        background: red;
+                        border: none;
+                        color: white;
+                        padding: 7px 15px;
+                    }
+                }
+            }
+        }
+    }
+    
+
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        // background: white;
+
+        thead{
+            tr{
+                background: #ccc;
+                th{
+                    border: 1px solid #ddd;
+                    padding: 5px;
+                }
+            }
+        }
+
+        tbody{
+
+            td{
+                background: white;  
+                border: 1px solid #ccc; 
+                padding: 5px;        
+            }
+            
+        }
+    }
+
+    
+
+    
+}
