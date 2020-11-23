@@ -62,7 +62,8 @@
 
     <script>
         $(document).ready(function(){
-            setInterval(function(){
+
+            function showDetails(){
                 $.ajax({
                     url: '{{route("show.paint.job")}}',
                     type: 'get',
@@ -81,9 +82,7 @@
                         console.log(data)
                     }
                 })
-            },5000);
 
-            setInterval(function(){
                 $.ajax({
                     url:'{{route("show.shop.performance")}}',
                     type: 'get',
@@ -102,8 +101,13 @@
                         console.log(data)
                     }
                 })
+            }
 
-            },5000);
+            showDetails();
+            
+            setInterval(showDetails(),5000);
+
+            
         })
     </script>
 @endsection
