@@ -22,12 +22,12 @@
 
                     <div class="car-details-item">
                         <label for="">Plate No.</label>
-                        <input type="text" name='plateNo' placeholder="Enter Plate No.">
+                        <input type="text" name='plate_no' id="plateNo" placeholder="Enter Plate No." autocomplete="off">
                     </div>
                     
                     <div class="car-details-item">
                         <label for="">Current Color</label>
-                        <select name="curColor" id="curColor">
+                        <select name="current_color" id="curColor">
                             <option value="">--</option>
                             <option value="Blue">Blue</option>
                             <option value="Red">Red</option>
@@ -37,14 +37,14 @@
 
                     <div class="car-details-item">
                         <label for="">Target Color</label>
-                        <select name="tarColor" id="tarColor">
+                        <select name="target_color" id="tarColor">
                             <option value="">--</option>
                             <option value="Blue">Blue</option>
                             <option value="Red">Red</option>
                             <option value="Green">Green</option>
                         </select>
                     </div>
-
+                    
                     <div class="car-details-button">
                         <button id="btnSubmit" type="button" class='btn btn-submit'>
                             Submit
@@ -58,7 +58,33 @@
         $(document).ready(function(){
 
             $('#btnSubmit').click(function(){
+
+                const plateNo = $('#plateNo').val();
+                const curColor = $('#curColor').val();
+                const tarColor = $('#tarColor').val();
                 
+                $.ajax({
+                    url: "{{route('create.paint.job')}}",
+                    type: 'POST',
+                    data:{
+                        plate_no:plateNo,
+                        current_color:curColor,
+                        target_color:tarColor,
+                        _token: '{{csrf_token()}}'
+                    },
+                    success: function(data){
+                        if(data == 1) window.location.href = "{{route('pages.paintJob')}}";
+                    },
+                    error: function(err){
+                        if (err.status == 422) { 
+                            $('.require-message').remove();
+                            $.each(err.responseJSON.errors, function (i, error) {
+                                const el = $(document).find('[name="'+i+'"]');
+                                el.after($('<label class="require-message">'+error[0]+'</label>'));
+                            });
+                        }
+                    }
+                });
             });
 
             $('#curColor').change(function(){
@@ -102,6 +128,8 @@
                         break;
                 }
             })
+
+            
         })
     </script>
 @endsection
