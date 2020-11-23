@@ -55,6 +55,13 @@
   display: grid;
   -ms-grid-columns: (1fr)[3];
       grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.wrapper .panel .panel-body .car-photo .current-color-photo img {
+  width: 100%;
+  height: 100%;
 }
 
 .wrapper .panel .panel-body .car-photo .arrow-photo {
@@ -62,6 +69,11 @@
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
+}
+
+.wrapper .panel .panel-body .car-photo .target-color-photo img {
+  width: 100%;
+  height: 100%;
 }
 
 .wrapper .panel .panel-body .car-details {
@@ -99,6 +111,16 @@
   border: none;
   color: white;
   padding: 7px 15px;
+  cursor: pointer;
+}
+
+.wrapper .panel .panel-body .require-message {
+  color: red;
+  -ms-grid-column: 2;
+      grid-column-start: 2;
+  text-align: left;
+  margin-top: 3px;
+  margin-left: 20px;
 }
 
 .wrapper table {
@@ -119,5 +141,23 @@
   background: white;
   border: 1px solid #ccc;
   padding: 5px;
+}
+
+.wrapper .btn.btn-complete {
+  color: white;
+  text-decoration: none;
+  background: #02a502;
+  padding: 3px 7px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+}
+
+.wrapper .btn.btn-complete:hover {
+  background: #027102;
+}
+
+.wrapper .center {
+  text-align: center;
 }
 /*# sourceMappingURL=style.css.map */
