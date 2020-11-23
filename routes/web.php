@@ -15,20 +15,20 @@ use App\Http\Controllers\PaintJobController;
 
 Route::get('/', function () {
     return view('pages.newPaintJob');
-});
+})->name('pages.newPaintJob');
 
 Route::get('/paint_job', function () {
     return view('pages.paintJob');
-});
+})->name('pages.paintJob');
 
 Route::get('/show_paint_job', [PaintJobController::class, 'showPaintJob'] )
 ->name('show.paint.job');
 
-Route::post('/create_paintJob', [PaintJobController::class, 'createPaintJob'] )
-->name('create.paint.job');
-
 Route::get('/show_shop_performance', [PaintJobController::class, 'showShopPerformance'] )
 ->name('show.shop.performance');
 
-Route::post('/paintJob_create',[PaintJobController::class, 'createPaintJob'] )
-        ->name('paintJob.create');
+Route::post('/create_paint_job', [PaintJobController::class, 'createPaintJob'] )
+->name('create.paint.job');
+
+Route::get('/complete_paint_job', [PaintJobController::class, 'completePaintJob'] )
+->name('complete.paint.job');
