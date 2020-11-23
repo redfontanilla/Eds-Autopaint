@@ -20,7 +20,12 @@ class PaintJobController extends Controller
                             <td>".$progress->ctp_plateNo."</td>
                             <td>".$progress->ctp_currentColor."</td>
                             <td>".$progress->ctp_targetColor."</td>
-                            <td><a href='/markComplete'>Mark Complete</a></td>
+                            <td class='center'>
+                                <form action='/complete_paint_job' method='get'>
+                                    <input type='hidden' name='complete_id' value='$progress->ctp_id'>
+                                    <button type='submit' class='btn btn-complete'>Mark Complete</button>
+                                </form>
+                            </td>
                         </tr>";
         }
 
@@ -49,14 +54,41 @@ class PaintJobController extends Controller
 
     }
 
-    public function createPaintJob(){
+    public function createPaintJob(Request $request){
 
-        // $request->validate([
-        //     'plateNo' => 'required',
-        //     'curColor' => 'required',
-        //     'tarColor' => 'required'
-        // ]);
+        $request->validate([
+            'plate_no' => 'required',
+            'current_color' => 'required',
+            'target_color' => 'required'
+        ]);
 
-        return 'eds';
+        $plateNo = $request->input('plate_no');
+        $current_color = $request->input('current_color');
+        $target_color = $request->input('target_color');
+        
+        $countProgress = DB::select('select count(ctp_id) as countProgress from tbl_carToPaint where ctp_status = "progress" ');
+
+        //$countProg = json_encode($countProgress[0]);
+
+        if($countProgress[0]->countProgress < 5){
+
+        DB::insert("insert into tbl_carToPaint (ctp_plateNo,ctp_currentColor,ctp_targetColor,ctp_status) values ('".$plateNo."','". $current_color."', '".$target_color."','progress')");
+
+        } else{
+
+        DB::insert("insert into tbl_carToPaint (ctp_plateNo,ctp_currentColor,ctp_targetColor,ctp_status) values ('".$plateNo."','". $current_color."', '".$target_color."','queue')");
+        }
+
+        return 1;
+
+    }
+
+    public function completePaintJob(Request $request){
+
+        $id = $request->input("complete_id");
+        DB::update('update tbl_carToPaint set ctp_status = "painted" where ctp_id = '.$id );
+        DB::select('update tbl_carToPaint set ctp_status = "progress" where ctp_id = (select min(ctp_id) from tbl_cartopaint where ctp_status = "queue") ');
+
+        return view('pages.paintJob');
     }
 }
